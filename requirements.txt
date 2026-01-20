@@ -1,8 +1,30 @@
+# LangChain Core
 langchain>=0.3.0
 langchain-openai>=0.3.0
 langchain-community>=0.3.0
 langchain-experimental>=0.3.0
+
+# OpenAI
 openai>=1.50.0
+
+# Environment
 python-dotenv>=1.0.0
+
+# Search Tools (for ReAct Agent)
 duckduckgo-search>=6.0.0
 wikipedia>=1.4.0
+
+# RAG - Retrieval-Augmented Generation
+chromadb>=0.4.0
+sentence-transformers>=2.2.0
+pypdf>=4.0.0
+unstructured>=0.12.0
+
+# Ollama - Local Models
+langchain-ollama>=0.1.0
+
+# Reranking (optional)
+cohere>=5.0.0
+
+# Vision/Multimodal
+pillow>=10.0.0
