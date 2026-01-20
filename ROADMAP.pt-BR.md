@@ -24,11 +24,11 @@ Um guia completo para desenvolvedores que querem dominar o desenvolvimento assis
 ┌─────────────────────────────────────────────────────────────┐
 │                    AI-ASSISTED DEVELOPMENT                  │
 ├─────────────────────────────────────────────────────────────┤
-│  PROMPT ENGINEERING    │    CONTEXT ENGINEERING            │
-│  (Como falar com IA)   │    (Como dar contexto à IA)       │
+│  PROMPT ENGINEERING    │    CONTEXT ENGINEERING             │
+│  (Como falar com IA)   │    (Como dar contexto à IA)        │
 ├────────────────────────┴────────────────────────────────────┤
 │                     TOOLING MODERNO                         │
-│  Claude Code │ Agents │ Skills │ MCP │ Hooks               │
+│  Claude Code │ Agents │ Skills │ MCP │ Hooks                │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -59,7 +59,7 @@ Entender como as 30 técnicas se relacionam ajuda a escolher a ferramenta certa 
 FUNDAÇÃO (01-06)
     │
     ├── 01 Zero-Shot ──────────────────────────────┐
-    │       │                                       │
+    │       │                                      │
     ├── 02 Chain of Thought ───┐                   │
     │       │                  │                   │
     ├── 03 Few-Shot ──────────┐│                   │
@@ -74,36 +74,36 @@ FUNDAÇÃO (01-06)
             │                             │
             ▼                             ▼
     ┌───────────────────────────────────────────────┐
-    │           CONTEXT ENGINEERING (11-30)          │
+    │          CONTEXT ENGINEERING (11-30)          │
     ├───────────────────────────────────────────────┤
     │                                               │
-    │   11 RAG Basic ◄─────────────────────────┐   │
-    │       │                                   │   │
-    │       ├── 12 RAG + Reranking             │   │
-    │       │                                   │   │
-    │       └── 13 RAG Conversational          │   │
-    │               │                           │   │
-    │               ▼                           │   │
-    │   ┌─────────────────────────────────┐    │   │
-    │   │  21 Advanced Chunking ◄─────────┼────┘   │
-    │   │      │                          │        │
-    │   │      ├── 22 Hybrid Search       │        │
-    │   │      │                          │        │
-    │   │      ├── 23 Query Transform     │        │
-    │   │      │                          │        │
-    │   │      ├── 24 Contextual Compress │        │
-    │   │      │                          │        │
-    │   │      └── 25 Self-Query          │        │
-    │   │              │                  │        │
-    │   └──────────────┼──────────────────┘        │
-    │                  ▼                           │
-    │   ┌─────────────────────────────────┐        │
-    │   │  26 Parent-Document             │        │
-    │   │  27 Multi-Vector                │        │
-    │   │  28 Ensemble Retrieval          │        │
-    │   │  29 Long Context                │        │
-    │   │  30 Time-Weighted               │        │
-    │   └─────────────────────────────────┘        │
+    │   11 RAG Basic ◄─────────────────────────┐    │
+    │       │                                  │    │
+    │       ├── 12 RAG + Reranking             │    │
+    │       │                                  │    │
+    │       └── 13 RAG Conversational          │    │
+    │               │                          │    │
+    │               ▼                          │    │
+    │   ┌─────────────────────────────────┐    │    │
+    │   │  21 Advanced Chunking ◄─────────┼────┘    │
+    │   │      │                          │         │
+    │   │      ├── 22 Hybrid Search       │         │
+    │   │      │                          │         │
+    │   │      ├── 23 Query Transform     │         │
+    │   │      │                          │         │
+    │   │      ├── 24 Contextual Compress │         │
+    │   │      │                          │         │
+    │   │      └── 25 Self-Query          │         │
+    │   │              │                  │         │
+    │   └──────────────┼──────────────────┘         │
+    │                  ▼                            │
+    │   ┌─────────────────────────────────┐         │
+    │   │  26 Parent-Document             │         │
+    │   │  27 Multi-Vector                │         │
+    │   │  28 Ensemble Retrieval          │         │
+    │   │  29 Long Context                │         │
+    │   │  30 Time-Weighted               │         │
+    │   └─────────────────────────────────┘         │
     └───────────────────────────────────────────────┘
 ```
 
@@ -425,17 +425,17 @@ Agentes de IA que rodam em loops são um padrão fundamental para construir sist
 │                      AGENTIC LOOP                           │
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
-│    ┌──────────┐    ┌──────────┐    ┌──────────┐           │
-│    │  PERCEIVE │───▶│  REASON  │───▶│   ACT    │           │
-│    │  (Input)  │    │  (Think) │    │ (Output) │           │
-│    └──────────┘    └──────────┘    └────┬─────┘           │
-│         ▲                               │                  │
-│         │         ┌──────────┐          │                  │
-│         └─────────│ OBSERVE  │◀─────────┘                  │
-│                   │(Feedback)│                             │
-│                   └──────────┘                             │
+│    ┌───────────┐    ┌──────────┐    ┌──────────┐            │
+│    │  PERCEIVE │───▶│  REASON  │───▶│   ACT    │            │
+│    │  (Input)  │    │  (Think) │    │ (Output) │            │
+│    └───────────┘    └──────────┘    └────┬─────┘            │
+│         ▲                                │                  │
+│         │         ┌──────────┐           │                  │
+│         └─────────│ OBSERVE  │◀──────────┘                  │
+│                   │(Feedback)│                              │
+│                   └──────────┘                              │
 │                                                             │
-│    Loop continua até: objetivo atingido OU max iterações   │
+│    Loop continua até: objetivo atingido OU max iterações    │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -474,23 +474,23 @@ while not satisfactory:
 **Padrão 4: Multi-Agent Orchestration**
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                     ORCHESTRATOR                            │
-│                    (Coordinator)                            │
-├─────────────────────────────────────────────────────────────┤
-│         │              │              │                     │
-│    ┌────▼────┐   ┌────▼────┐   ┌────▼────┐                │
-│    │ Agent 1 │   │ Agent 2 │   │ Agent 3 │                │
-│    │(Research)│   │ (Code)  │   │(Review) │                │
-│    └────┬────┘   └────┬────┘   └────┬────┘                │
-│         │              │              │                     │
-│         └──────────────┴──────────────┘                     │
-│                        │                                    │
-│                   ┌────▼────┐                              │
-│                   │ COMBINE │                              │
-│                   │ RESULTS │                              │
-│                   └─────────┘                              │
-└─────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────┐
+│                     ORCHESTRATOR                    │
+│                    (Coordinator)                    │
+├─────────────────────────────────────────────────────┤
+│         │             │             │               │
+│    ┌────▼─────┐  ┌────▼────┐   ┌────▼────┐          │
+│    │  Agent 1 │  │ Agent 2 │   │ Agent 3 │          │
+│    │(Research)│  │ (Code)  │   │(Review) │          │
+│    └────┬─── ─┘  └────┬────┘   └────┬────┘          │
+│         │             │             │               │
+│         └─────────────┴─────────────┘               │
+│                       │                             │
+│                  ┌────▼────┐                        │
+│                  │ COMBINE │                        │
+│                  │ RESULTS │                        │
+│                  └─────────┘                        │
+└─────────────────────────────────────────────────────┘
 ```
 
 #### Implementação Prática com LangChain/LangGraph
@@ -527,23 +527,23 @@ result = agent_executor.invoke({"input": "Pesquise e calcule..."})
 │     └── Defina objetivo claro e critérios de sucesso        │
 │                                                             │
 │  2. DECOMPOSIÇÃO                                            │
-│     └── Quebre em sub-tarefas (use Least-to-Most)          │
+│     └── Quebre em sub-tarefas (use Least-to-Most)           │
 │                                                             │
 │  3. ESCOLHA DO PADRÃO                                       │
-│     ├── Tarefa simples → Single Agent (ReAct)              │
+│     ├── Tarefa simples → Single Agent (ReAct)               │
 │     ├── Tarefa complexa → Plan-Execute                      │
-│     ├── Qualidade crítica → Self-Refine Loop               │
-│     └── Multi-domínio → Multi-Agent Orchestration          │
+│     ├── Qualidade crítica → Self-Refine Loop                │
+│     └── Multi-domínio → Multi-Agent Orchestration           │
 │                                                             │
 │  4. IMPLEMENTAÇÃO                                           │
-│     ├── Configure max_iterations (evita loops infinitos)   │
-│     ├── Defina critérios de parada claros                  │
+│     ├── Configure max_iterations (evita loops infinitos)    │
+│     ├── Defina critérios de parada claros                   │
 │     └── Adicione logging/observability                      │
 │                                                             │
 │  5. VALIDAÇÃO                                               │
-│     ├── Teste com casos edge                               │
-│     ├── Monitore custos (tokens por loop)                  │
-│     └── Ajuste parâmetros conforme necessário              │
+│     ├── Teste com casos edge                                │
+│     ├── Monitore custos (tokens por loop)                   │
+│     └── Ajuste parâmetros conforme necessário               │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -722,38 +722,38 @@ docker build -t app .
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
 │  PROMPT ENGINEERING                                         │
-│  ├── Zero-Shot (01)      → Prompts diretos                 │
-│  ├── Chain of Thought (02) → Passo a passo                 │
-│  ├── Few-Shot (03)       → Exemplos guiam                  │
-│  ├── Tree of Thoughts (04) → Múltiplos caminhos            │
-│  ├── Skeleton (05)       → Estrutura primeiro              │
-│  ├── ReAct (06)          → Raciocínio + Ações              │
-│  ├── Self-Consistency (07) → Vota em respostas             │
-│  ├── Least-to-Most (08)  → Decompõe problemas              │
-│  ├── Self-Refine (09)    → Itera & melhora                 │
-│  └── Prompt Chaining (10) → Pipeline de prompts            │
+│  ├── Zero-Shot (01)      → Prompts diretos                  │
+│  ├── Chain of Thought (02) → Passo a passo                  │
+│  ├── Few-Shot (03)       → Exemplos guiam                   │
+│  ├── Tree of Thoughts (04) → Múltiplos caminhos             │
+│  ├── Skeleton (05)       → Estrutura primeiro               │
+│  ├── ReAct (06)          → Raciocínio + Ações               │
+│  ├── Self-Consistency (07) → Vota em respostas              │
+│  ├── Least-to-Most (08)  → Decompõe problemas               │
+│  ├── Self-Refine (09)    → Itera & melhora                  │
+│  └── Prompt Chaining (10) → Pipeline de prompts             │
 │                                                             │
 │  CONTEXT ENGINEERING                                        │
-│  ├── RAG Basic (11)      → Retrieval de documentos         │
-│  ├── RAG Reranking (12)  → Melhor relevância               │
-│  ├── RAG Conversational (13) → Chat + docs                 │
-│  ├── Ollama Basic (14)   → LLMs locais                     │
-│  ├── Ollama RAG (15)     → RAG offline                     │
-│  ├── Structured (16)     → JSON/Pydantic                   │
-│  ├── Tool Calling (17)   → Funções                         │
-│  ├── Vision (18)         → Imagens                         │
-│  ├── Memory (19)         → Conversação                     │
-│  ├── Meta-Prompting (20) → Otimiza prompts                 │
-│  ├── Chunking (21)       → Estratégias de split            │
-│  ├── Hybrid Search (22)  → BM25 + Vector                   │
-│  ├── Query Transform (23) → Melhora queries                │
-│  ├── Compression (24)    → Reduz tokens                    │
-│  ├── Self-Query (25)     → Auto filtros                    │
-│  ├── Parent-Doc (26)     → Mais contexto                   │
-│  ├── Multi-Vector (27)   → Múltiplas representações        │
-│  ├── Ensemble (28)       → Combina retrievers              │
-│  ├── Long Context (29)   → Docs grandes                    │
-│  └── Time-Weighted (30)  → Viés de recência                │
+│  ├── RAG Basic (11)      → Retrieval de documentos          │
+│  ├── RAG Reranking (12)  → Melhor relevância                │
+│  ├── RAG Conversational (13) → Chat + docs                  │
+│  ├── Ollama Basic (14)   → LLMs locais                      │
+│  ├── Ollama RAG (15)     → RAG offline                      │
+│  ├── Structured (16)     → JSON/Pydantic                    │
+│  ├── Tool Calling (17)   → Funções                          │
+│  ├── Vision (18)         → Imagens                          │
+│  ├── Memory (19)         → Conversação                      │
+│  ├── Meta-Prompting (20) → Otimiza prompts                  │
+│  ├── Chunking (21)       → Estratégias de split             │
+│  ├── Hybrid Search (22)  → BM25 + Vector                    │
+│  ├── Query Transform (23) → Melhora queries                 │
+│  ├── Compression (24)    → Reduz tokens                     │
+│  ├── Self-Query (25)     → Auto filtros                     │
+│  ├── Parent-Doc (26)     → Mais contexto                    │
+│  ├── Multi-Vector (27)   → Múltiplas representações         │
+│  ├── Ensemble (28)       → Combina retrievers               │
+│  ├── Long Context (29)   → Docs grandes                     │
+│  └── Time-Weighted (30)  → Viés de recência                 │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```

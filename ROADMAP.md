@@ -24,11 +24,11 @@ A comprehensive guide for developers who want to master AI-assisted development,
 ┌─────────────────────────────────────────────────────────────┐
 │                    AI-ASSISTED DEVELOPMENT                  │
 ├─────────────────────────────────────────────────────────────┤
-│  PROMPT ENGINEERING    │    CONTEXT ENGINEERING            │
-│  (How to talk to AI)   │    (How to give context to AI)   │
+│  PROMPT ENGINEERING    │    CONTEXT ENGINEERING             │
+│  (How to talk to AI)   │    (How to give context to AI)     │
 ├────────────────────────┴────────────────────────────────────┤
 │                     MODERN TOOLING                          │
-│  Claude Code │ Agents │ Skills │ MCP │ Hooks               │
+│  Claude Code │ Agents │ Skills │ MCP │ Hooks                │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -59,7 +59,7 @@ Understanding how the 30 techniques relate to each other helps you choose the ri
 FOUNDATION (01-06)
     │
     ├── 01 Zero-Shot ──────────────────────────────┐
-    │       │                                       │
+    │       │                                      │
     ├── 02 Chain of Thought ───┐                   │
     │       │                  │                   │
     ├── 03 Few-Shot ──────────┐│                   │
@@ -73,17 +73,17 @@ FOUNDATION (01-06)
             │                 └──── 10 Prompt Chaining
             │                             │
             ▼                             ▼
-    ┌───────────────────────────────────────────────┐
-    │           CONTEXT ENGINEERING (11-30)          │
-    ├───────────────────────────────────────────────┤
-    │                                               │
+    ┌──────────────────────────────────────────────┐
+    │          CONTEXT ENGINEERING (11-30)         │
+    ├──────────────────────────────────────────────┤
+    │                                              │
     │   11 RAG Basic ◄─────────────────────────┐   │
-    │       │                                   │   │
+    │       │                                  │   │
     │       ├── 12 RAG + Reranking             │   │
-    │       │                                   │   │
+    │       │                                  │   │
     │       └── 13 RAG Conversational          │   │
-    │               │                           │   │
-    │               ▼                           │   │
+    │               │                          │   │
+    │               ▼                          │   │
     │   ┌─────────────────────────────────┐    │   │
     │   │  21 Advanced Chunking ◄─────────┼────┘   │
     │   │      │                          │        │
@@ -104,7 +104,7 @@ FOUNDATION (01-06)
     │   │  29 Long Context                │        │
     │   │  30 Time-Weighted               │        │
     │   └─────────────────────────────────┘        │
-    └───────────────────────────────────────────────┘
+    └──────────────────────────────────────────────┘
 ```
 
 ### Technique Categories
@@ -425,17 +425,17 @@ AI agents that run in loops are a fundamental pattern for building autonomous sy
 │                      AGENTIC LOOP                           │
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
-│    ┌──────────┐    ┌──────────┐    ┌──────────┐           │
-│    │  PERCEIVE │───▶│  REASON  │───▶│   ACT    │           │
-│    │  (Input)  │    │  (Think) │    │ (Output) │           │
-│    └──────────┘    └──────────┘    └────┬─────┘           │
-│         ▲                               │                  │
-│         │         ┌──────────┐          │                  │
-│         └─────────│ OBSERVE  │◀─────────┘                  │
-│                   │(Feedback)│                             │
-│                   └──────────┘                             │
+│    ┌──────────┐    ┌──────────┐    ┌──────────┐             │
+│    │  PERCEIVE │───▶│  REASON  │───▶│   ACT    │            │
+│    │  (Input)  │    │  (Think) │    │ (Output) │            │
+│    └──────────┘    └──────────┘    └────┬─────┘             │
+│         ▲                               │                   │
+│         │         ┌──────────┐          │                   │
+│         └─────────│ OBSERVE  │◀─────────┘                   │
+│                   │(Feedback)│                              │
+│                   └──────────┘                              │
 │                                                             │
-│    Loop continues until: goal reached OR max iterations    │
+│    Loop continues until: goal reached OR max iterations     │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -474,23 +474,23 @@ while not satisfactory:
 **Pattern 4: Multi-Agent Orchestration**
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                     ORCHESTRATOR                            │
-│                    (Coordinator)                            │
-├─────────────────────────────────────────────────────────────┤
-│         │              │              │                     │
-│    ┌────▼────┐   ┌────▼────┐   ┌────▼────┐                │
-│    │ Agent 1 │   │ Agent 2 │   │ Agent 3 │                │
-│    │(Research)│   │ (Code)  │   │(Review) │                │
-│    └────┬────┘   └────┬────┘   └────┬────┘                │
-│         │              │              │                     │
-│         └──────────────┴──────────────┘                     │
-│                        │                                    │
-│                   ┌────▼────┐                              │
-│                   │ COMBINE │                              │
-│                   │ RESULTS │                              │
-│                   └─────────┘                              │
-└─────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────┐
+│                     ORCHESTRATOR                         │
+│                    (Coordinator)                         │
+├──────────────────────────────────────────────────────────┤
+│         │              │             │                   │
+│    ┌────▼─────┐   ┌────▼────┐   ┌────▼────┐              │
+│    │ Agent 1  │   │ Agent 2 │   │ Agent 3 │              │
+│    │(Research)│   │ (Code)  │   │(Review) │              │
+│    └────┬─────┘   └────┬────┘   └────┬────┘              │
+│         │              │             │                   │
+│         └──────────────┴─────────────┘                   │
+│                        │                                 │
+│                   ┌────▼────┐                            │
+│                   │ COMBINE │                            │
+│                   │ RESULTS │                            │
+│                   └─────────┘                            │
+└──────────────────────────────────────────────────────────┘
 ```
 
 #### Practical Implementation with LangChain/LangGraph
@@ -527,23 +527,23 @@ result = agent_executor.invoke({"input": "Research and calculate..."})
 │     └── Define clear objective and success criteria         │
 │                                                             │
 │  2. DECOMPOSITION                                           │
-│     └── Break into sub-tasks (use Least-to-Most)           │
+│     └── Break into sub-tasks (use Least-to-Most)            │
 │                                                             │
 │  3. PATTERN SELECTION                                       │
-│     ├── Simple task → Single Agent (ReAct)                 │
+│     ├── Simple task → Single Agent (ReAct)                  │
 │     ├── Complex task → Plan-Execute                         │
-│     ├── Critical quality → Self-Refine Loop                │
-│     └── Multi-domain → Multi-Agent Orchestration           │
+│     ├── Critical quality → Self-Refine Loop                 │
+│     └── Multi-domain → Multi-Agent Orchestration            │
 │                                                             │
 │  4. IMPLEMENTATION                                          │
-│     ├── Configure max_iterations (avoid infinite loops)    │
-│     ├── Define clear stopping criteria                     │
-│     └── Add logging/observability                          │
+│     ├── Configure max_iterations (avoid infinite loops)     │
+│     ├── Define clear stopping criteria                      │
+│     └── Add logging/observability                           │
 │                                                             │
 │  5. VALIDATION                                              │
-│     ├── Test with edge cases                               │
-│     ├── Monitor costs (tokens per loop)                    │
-│     └── Adjust parameters as needed                        │
+│     ├── Test with edge cases                                │
+│     ├── Monitor costs (tokens per loop)                     │
+│     └── Adjust parameters as needed                         │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -721,38 +721,38 @@ docker build -t app .
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
 │  PROMPT ENGINEERING                                         │
-│  ├── Zero-Shot (01)      → Direct prompts                  │
-│  ├── Chain of Thought (02) → Step-by-step                  │
-│  ├── Few-Shot (03)       → Examples guide                  │
-│  ├── Tree of Thoughts (04) → Multiple paths                │
-│  ├── Skeleton (05)       → Structure first                 │
-│  ├── ReAct (06)          → Reasoning + Actions             │
-│  ├── Self-Consistency (07) → Vote on answers               │
-│  ├── Least-to-Most (08)  → Decompose problems              │
-│  ├── Self-Refine (09)    → Iterate & improve               │
-│  └── Prompt Chaining (10) → Pipeline prompts               │
+│  ├── Zero-Shot (01)      → Direct prompts                   │
+│  ├── Chain of Thought (02) → Step-by-step                   │
+│  ├── Few-Shot (03)       → Examples guide                   │
+│  ├── Tree of Thoughts (04) → Multiple paths                 │
+│  ├── Skeleton (05)       → Structure first                  │
+│  ├── ReAct (06)          → Reasoning + Actions              │
+│  ├── Self-Consistency (07) → Vote on answers                │
+│  ├── Least-to-Most (08)  → Decompose problems               │
+│  ├── Self-Refine (09)    → Iterate & improve                │
+│  └── Prompt Chaining (10) → Pipeline prompts                │
 │                                                             │
 │  CONTEXT ENGINEERING                                        │
-│  ├── RAG Basic (11)      → Document retrieval              │
-│  ├── RAG Reranking (12)  → Better relevance                │
-│  ├── RAG Conversational (13) → Chat + docs                 │
-│  ├── Ollama Basic (14)   → Local LLMs                      │
-│  ├── Ollama RAG (15)     → Offline RAG                     │
-│  ├── Structured (16)     → JSON/Pydantic                   │
-│  ├── Tool Calling (17)   → Functions                       │
-│  ├── Vision (18)         → Images                          │
-│  ├── Memory (19)         → Conversation                    │
-│  ├── Meta-Prompting (20) → Optimize prompts                │
-│  ├── Chunking (21)       → Split strategies                │
-│  ├── Hybrid Search (22)  → BM25 + Vector                   │
-│  ├── Query Transform (23) → Better queries                 │
-│  ├── Compression (24)    → Reduce tokens                   │
-│  ├── Self-Query (25)     → Auto filters                    │
-│  ├── Parent-Doc (26)     → More context                    │
-│  ├── Multi-Vector (27)   → Multiple representations        │
-│  ├── Ensemble (28)       → Combine retrievers              │
-│  ├── Long Context (29)   → Large docs                      │
-│  └── Time-Weighted (30)  → Recency bias                    │
+│  ├── RAG Basic (11)      → Document retrieval               │
+│  ├── RAG Reranking (12)  → Better relevance                 │
+│  ├── RAG Conversational (13) → Chat + docs                  │
+│  ├── Ollama Basic (14)   → Local LLMs                       │
+│  ├── Ollama RAG (15)     → Offline RAG                      │
+│  ├── Structured (16)     → JSON/Pydantic                    │
+│  ├── Tool Calling (17)   → Functions                        │
+│  ├── Vision (18)         → Images                           │
+│  ├── Memory (19)         → Conversation                     │
+│  ├── Meta-Prompting (20) → Optimize prompts                 │
+│  ├── Chunking (21)       → Split strategies                 │
+│  ├── Hybrid Search (22)  → BM25 + Vector                    │
+│  ├── Query Transform (23) → Better queries                  │
+│  ├── Compression (24)    → Reduce tokens                    │
+│  ├── Self-Query (25)     → Auto filters                     │
+│  ├── Parent-Doc (26)     → More context                     │
+│  ├── Multi-Vector (27)   → Multiple representations         │
+│  ├── Ensemble (28)       → Combine retrievers               │
+│  ├── Long Context (29)   → Large docs                       │
+│  └── Time-Weighted (30)  → Recency bias                     │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
