@@ -1,12 +1,14 @@
-# Prompt Engineering com LangChain e OpenAI
+# Prompt Engineering & Context Engineering com LangChain e OpenAI
 
-Scripts demonstrando 20 técnicas de Prompt Engineering usando LangChain e a API da OpenAI.
+Scripts demonstrando 30 técnicas de Prompt Engineering e Context Engineering usando LangChain e a API da OpenAI.
 
 > **Language / Idioma:** Português Brasileiro | [English](README.md)
 
+> **Roadmap de Estudos:** Quer dominar desenvolvimento assistido por IA? Confira o [ROADMAP.pt-BR.md](ROADMAP.pt-BR.md) - um guia completo com trilhas de aprendizado (iniciante a avançado), mapa de conexões entre técnicas, templates de organização de projetos e integração com ferramentas modernas como Claude Code.
+
 ## Técnicas Implementadas
 
-### Prompting Básico (01-06)
+### Prompt Engineering - Básico (01-06)
 
 | Script | Técnica | Descrição |
 |--------|---------|-----------|
@@ -17,7 +19,7 @@ Scripts demonstrando 20 técnicas de Prompt Engineering usando LangChain e a API
 | `05_skeleton_of_thought.py` | Skeleton of Thought (SoT) | Estrutura primeiro, detalhes depois |
 | `06_react_agent.py` | ReAct | Raciocínio + Ações com ferramentas |
 
-### Prompting Avançado (07-10)
+### Prompt Engineering - Avançado (07-10)
 
 | Script | Técnica | Descrição |
 |--------|---------|-----------|
@@ -26,7 +28,7 @@ Scripts demonstrando 20 técnicas de Prompt Engineering usando LangChain e a API
 | `09_self_refine.py` | Self-Refine | Crítica e melhoria iterativa |
 | `10_prompt_chaining.py` | Prompt Chaining | Pipeline de prompts conectados |
 
-### RAG - Geração Aumentada por Recuperação (11-13)
+### Context Engineering - RAG (11-13)
 
 | Script | Técnica | Descrição |
 |--------|---------|-----------|
@@ -34,7 +36,7 @@ Scripts demonstrando 20 técnicas de Prompt Engineering usando LangChain e a API
 | `12_rag_reranking.py` | RAG + Reranking | Reordenação para melhor relevância |
 | `13_rag_conversational.py` | RAG Conversacional | RAG com memória de chat |
 
-### Ollama - Modelos Locais (14-15)
+### Modelos Locais - Ollama (14-15)
 
 | Script | Técnica | Descrição |
 |--------|---------|-----------|
@@ -55,6 +57,26 @@ Scripts demonstrando 20 técnicas de Prompt Engineering usando LangChain e a API
 | `18_vision_multimodal.py` | Vision/Multimodal | Análise de imagens com GPT-4o |
 | `19_memory_conversation.py` | Memory/Conversation | Contexto persistente de conversa |
 | `20_meta_prompting.py` | Meta-Prompting | LLM gerando/otimizando prompts |
+
+### Context Engineering - Chunking & Recuperação (21-25)
+
+| Script | Técnica | Descrição |
+|--------|---------|-----------|
+| `21_advanced_chunking.py` | Chunking Avançado | Estratégias semântica, recursiva, por tokens, janela deslizante |
+| `22_hybrid_search.py` | Busca Híbrida | BM25 (palavra-chave) + Vetor (semântico) com fusão RRF |
+| `23_query_transformation.py` | Transformação de Query | HyDE, Multi-Query, Step-Back, Decomposição |
+| `24_contextual_compression.py` | Compressão Contextual | Extrair apenas partes relevantes dos documentos |
+| `25_self_query.py` | Self-Query Retrieval | LLM gera filtros de metadados automaticamente |
+
+### Context Engineering - Gerenciamento de Contexto (26-30)
+
+| Script | Técnica | Descrição |
+|--------|---------|-----------|
+| `26_parent_document.py` | Recuperação Documento-Pai | Chunks pequenos para busca, pais grandes para contexto |
+| `27_multi_vector.py` | Recuperação Multi-Vetor | Múltiplas representações (resumo + perguntas + conteúdo) |
+| `28_ensemble_retrieval.py` | Recuperação Ensemble | Combina múltiplos retrievers com RRF ponderado |
+| `29_long_context.py` | Estratégias de Contexto Longo | Map-Reduce, Refine, Map-Rerank para documentos grandes |
+| `30_time_weighted.py` | Recuperação Ponderada por Tempo | Viés de recência com decaimento exponencial |
 
 ## Requisitos
 
@@ -160,6 +182,20 @@ python techniques/pt-br/17_tool_calling.py
 python techniques/pt-br/18_vision_multimodal.py
 python techniques/pt-br/19_memory_conversation.py
 python techniques/pt-br/20_meta_prompting.py
+
+# Context Engineering - Chunking & Recuperação (21-25)
+python techniques/pt-br/21_advanced_chunking.py
+python techniques/pt-br/22_hybrid_search.py
+python techniques/pt-br/23_query_transformation.py
+python techniques/pt-br/24_contextual_compression.py
+python techniques/pt-br/25_self_query.py
+
+# Context Engineering - Gerenciamento de Contexto (26-30)
+python techniques/pt-br/26_parent_document.py
+python techniques/pt-br/27_multi_vector.py
+python techniques/pt-br/28_ensemble_retrieval.py
+python techniques/pt-br/29_long_context.py
+python techniques/pt-br/30_time_weighted.py
 ```
 
 **Exemplos em Inglês:**
@@ -537,6 +573,313 @@ prompt = gerar_prompt(
 print(prompt)
 ```
 
+---
+
+### 21. Chunking Avançado
+
+Múltiplas estratégias de divisão de texto otimizadas para diferentes tipos de conteúdo e cenários de recuperação.
+
+**Estratégias de chunking:**
+- `RecursivoCaractere` - Divisão hierárquica por separadores
+- `BaseadoToken` - Divisão por contagem de tokens (model-aware)
+- `MarkdownConsciente` - Respeita estrutura markdown
+- `Semantico` - Agrupa por similaridade semântica
+- `JanelaDeslizante` - Janelas de tamanho fixo com sobreposição
+- `BaseadoSentenca` - Limites naturais de sentença
+
+**Funções disponíveis:**
+- `chunking_recursivo_caractere(texto, tamanho_chunk, sobreposicao)` - Divisão recursiva padrão
+- `chunking_baseado_token(texto, tamanho_chunk)` - Divisão consciente de tokens
+- `chunking_markdown_consciente(texto)` - Preserva estrutura de markdown
+- `chunking_semantico(texto, limiar)` - Agrupamento baseado em similaridade
+- `chunking_janela_deslizante(texto, tamanho_janela, passo)` - Janelas sobrepostas
+- `chunking_baseado_sentenca(texto, sentencas_por_chunk)` - Agrupamento de sentenças
+
+**Exemplo:**
+```python
+from techniques.pt_br.advanced_chunking import chunking_semantico
+
+chunks = chunking_semantico(documento_longo, limiar=0.75)
+for chunk in chunks:
+    print(f"Chunk: {len(chunk)} caracteres")
+```
+
+---
+
+### 22. Busca Híbrida
+
+Combina busca baseada em palavras-chave (BM25) e semântica (vetor) usando Fusão de Ranking Recíproco.
+
+**Componentes:**
+- `RetrieverBM25` - Correspondência tradicional de palavras-chave
+- `RetrieverVetor` - Busca por similaridade semântica
+- `RetrieverHibrido` - Combinação ponderada
+
+**Funções disponíveis:**
+- `criar_retriever_hibrido(documentos, peso_bm25, peso_vetor)` - Criar retriever híbrido
+- `fusao_rank_reciproco(lista_resultados, k)` - Combinar resultados ranqueados
+- `busca_hibrida(consulta, k)` - Buscar com ambos os métodos
+
+**Exemplo:**
+```python
+from techniques.pt_br.hybrid_search import RetrieverHibrido
+
+retriever = RetrieverHibrido(documentos, peso_bm25=0.4, peso_vetor=0.6)
+resultados = retriever.buscar("algoritmos de machine learning", k=5)
+```
+
+---
+
+### 23. Transformação de Query
+
+Transforma consultas para melhorar a eficácia da recuperação usando várias técnicas.
+
+**Métodos de transformação:**
+- `HyDE` - Embeddings de Documento Hipotético (gera resposta hipotética, busca com ela)
+- `Multi-Query` - Gera múltiplas variações da consulta
+- `Step-Back` - Abstrai consulta para conceito mais amplo
+- `Decomposição` - Divide consulta complexa em sub-consultas
+
+**Funções disponíveis:**
+- `transformar_hyde(consulta)` - Gerar documento hipotético
+- `transformar_multi_query(consulta, num_queries)` - Gerar variações de consulta
+- `transformar_step_back(consulta)` - Abstrair para pergunta mais ampla
+- `decompor_query(consulta)` - Dividir em sub-perguntas
+
+**Exemplo:**
+```python
+from techniques.pt_br.query_transformation import transformar_multi_query
+
+queries = transformar_multi_query(
+    "Quais são as melhores práticas para microsserviços?",
+    num_queries=3
+)
+# Retorna variações como:
+# - "melhores práticas arquitetura microsserviços"
+# - "como projetar microsserviços efetivamente"
+# - "padrões recomendados para desenvolvimento de microsserviços"
+```
+
+---
+
+### 24. Compressão Contextual
+
+Extrai apenas as porções relevantes dos documentos recuperados para reduzir ruído e uso de tokens.
+
+**Métodos de compressão:**
+- `ExtratorLLM` - Usa LLM para extrair sentenças relevantes
+- `FiltroEmbeddings` - Filtra por similaridade semântica
+- `ExtratorSentencas` - Extrai sentenças relevantes por pontuação
+
+**Funções disponíveis:**
+- `criar_retriever_compressao(retriever_base, compressor)` - Encapsular retriever com compressão
+- `comprimir_llm(documentos, consulta)` - Compressão baseada em LLM
+- `filtro_embeddings(documentos, consulta, limiar)` - Filtragem baseada em similaridade
+
+**Exemplo:**
+```python
+from techniques.pt_br.contextual_compression import RetrieverCompressaoContextual
+
+retriever_compressao = RetrieverCompressaoContextual(
+    retriever_base=retriever_vetor,
+    compressor=CompressorExtratorLLM()
+)
+# Retorna apenas trechos relevantes em vez de documentos completos
+resultados = retriever_compressao.recuperar("O que é RAG?")
+```
+
+---
+
+### 25. Self-Query Retrieval
+
+LLM gera automaticamente filtros de metadados a partir de consultas em linguagem natural.
+
+**Recursos:**
+- Extração automática de filtros de consultas
+- Suporte para operadores de comparação (=, >, <, >=, <=)
+- Combina busca semântica com filtragem estruturada
+
+**Funções disponíveis:**
+- `criar_retriever_self_query(vectorstore, info_metadados)` - Criar retriever self-query
+- `parsear_consulta(consulta)` - Extrair consulta semântica e filtros
+- `aplicar_filtros(documentos, filtros)` - Aplicar filtros de metadados
+
+**Exemplo:**
+```python
+from techniques.pt_br.self_query import SelfQueryRetriever
+
+retriever = SelfQueryRetriever(
+    vectorstore=vectorstore,
+    campos_metadados=[
+        {"nome": "categoria", "tipo": "string"},
+        {"nome": "preco", "tipo": "float"},
+        {"nome": "ano", "tipo": "integer"}
+    ]
+)
+
+# Consulta: "eletrônicos baratos de 2024"
+# Auto-gera: categoria="eletrônicos", preco<100, ano=2024
+resultados = retriever.recuperar("eletrônicos baratos de 2024")
+```
+
+---
+
+### 26. Recuperação Documento-Pai
+
+Busca com chunks pequenos para precisão, mas recupera documentos-pai maiores para contexto.
+
+**Conceito:**
+- Chunks filhos: Pequenos (ex: 400 caracteres) para correspondência precisa
+- Documentos pais: Maiores (ex: 2000 caracteres) para contexto completo
+- Mapeia filho → pai para recuperação
+
+**Funções disponíveis:**
+- `criar_retriever_documento_pai(documentos, tamanho_filho, tamanho_pai)` - Criar retriever
+- `adicionar_documentos(documentos)` - Indexar documentos com relação pai-filho
+- `recuperar(consulta, k)` - Buscar filhos, retornar pais
+
+**Exemplo:**
+```python
+from techniques.pt_br.parent_document import RetrieverDocumentoPai
+
+retriever = RetrieverDocumentoPai(
+    tamanho_chunk_filho=400,
+    tamanho_chunk_pai=2000
+)
+retriever.adicionar_documentos(documentos)
+
+# Busca chunks pequenos, retorna contexto pai completo
+resultados = retriever.recuperar("arquitetura de rede neural", k=3)
+```
+
+---
+
+### 27. Recuperação Multi-Vetor
+
+Armazena múltiplas representações de documentos para recuperação aprimorada.
+
+**Tipos de representação:**
+- Conteúdo original do documento
+- Resumos gerados
+- Perguntas hipotéticas que o documento responde
+
+**Funções disponíveis:**
+- `criar_retriever_multi_vetor(documentos)` - Criar retriever com múltiplos vetores
+- `gerar_resumo(documento)` - Gerar resumo do documento
+- `gerar_perguntas(documento)` - Gerar perguntas hipotéticas
+- `recuperar(consulta, k)` - Buscar todas as representações
+
+**Exemplo:**
+```python
+from techniques.pt_br.multi_vector import RetrieverMultiVetor
+
+retriever = RetrieverMultiVetor()
+retriever.adicionar_documentos(documentos)  # Cria vetores de resumo + perguntas
+
+# Pode corresponder consulta a resumo, perguntas ou conteúdo original
+resultados = retriever.recuperar("Como funciona backpropagation?", k=3)
+```
+
+---
+
+### 28. Recuperação Ensemble
+
+Combina múltiplos retrievers usando Fusão de Ranking Recíproco com pesos configuráveis.
+
+**Componentes:**
+- Múltiplos retrievers base (BM25, Vetor, etc.)
+- Pesos configuráveis por retriever
+- Algoritmo RRF para combinação de scores
+
+**Funções disponíveis:**
+- `criar_retriever_ensemble(retrievers, pesos)` - Criar ensemble
+- `fusao_rank_reciproco(lista_resultados, pesos, k)` - Combinar com RRF
+
+**Exemplo:**
+```python
+from techniques.pt_br.ensemble_retrieval import RetrieverEnsemble
+
+ensemble = RetrieverEnsemble(
+    retrievers=[retriever_bm25, retriever_vetor, retriever_esparso],
+    pesos=[0.3, 0.5, 0.2]
+)
+resultados = ensemble.recuperar("otimização de machine learning", k=5)
+```
+
+---
+
+### 29. Estratégias de Contexto Longo
+
+Processa documentos que excedem janelas de contexto típicas usando várias estratégias.
+
+**Estratégias:**
+- `Map-Reduce` - Processa chunks separadamente, combina resultados
+- `Refine` - Constrói resposta iterativamente com cada chunk
+- `Map-Rerank` - Pontua cada chunk, usa os melhores
+- `Stuffing` - Encaixa conteúdo mais relevante no contexto
+
+**Funções disponíveis:**
+- `sumarizar_map_reduce(chunks)` - Sumarizar com map-reduce
+- `sumarizar_refine(chunks)` - Refinamento iterativo
+- `responder_map_rerank(chunks, pergunta)` - Pontuar e selecionar melhores chunks
+- `stuffing_com_priorizacao(chunks, pergunta, max_contexto)` - Stuffing baseado em prioridade
+
+**Exemplo:**
+```python
+from techniques.pt_br.long_context import sumarizar_map_reduce, responder_map_rerank
+
+# Sumarizar um documento de 50 páginas
+resumo = sumarizar_map_reduce(chunks_documento)
+
+# Responder pergunta usando melhores chunks
+resposta = responder_map_rerank(
+    chunks=chunks_documento,
+    pergunta="Quais são as principais conclusões?"
+)
+```
+
+---
+
+### 30. Recuperação Ponderada por Tempo
+
+Incorpora relevância temporal com decaimento exponencial para preferir documentos recentes.
+
+**Recursos:**
+- Função de decaimento exponencial para ponderação temporal
+- Taxa de decaimento e unidades de tempo configuráveis
+- Combina similaridade semântica com recência
+
+**Funções disponíveis:**
+- `criar_retriever_ponderado_tempo(documentos, taxa_decaimento)` - Criar retriever
+- `calcular_peso_temporal(timestamp, taxa_decaimento, unidade_tempo)` - Calcular peso de decaimento
+- `recuperar(consulta, k, fator_peso_tempo)` - Buscar com ponderação temporal
+
+**Exemplo:**
+```python
+from techniques.pt_br.time_weighted import RetrieverPonderadoPorTempo
+
+retriever = RetrieverPonderadoPorTempo(
+    documentos=artigos_noticias,
+    taxa_decaimento=0.05,  # Por dia
+    unidade_tempo="dias"
+)
+
+# Artigos recentes têm pontuação maior
+resultados = retriever.recuperar(
+    "desenvolvimentos em IA",
+    k=5,
+    fator_peso_tempo=0.4  # 40% tempo, 60% semântico
+)
+```
+
+**Guia de configuração:**
+| Caso de Uso | Taxa Decaimento | Unidade Tempo | Fator Peso |
+|-------------|-----------------|---------------|------------|
+| Notícias/Atual | 0.1-0.5 | horas | 0.5-0.7 |
+| Histórico chat | 0.05-0.1 | horas | 0.3-0.5 |
+| Documentação | 0.01-0.05 | dias | 0.2-0.4 |
+| Artigos pesquisa | 0.001-0.01 | dias | 0.1-0.3 |
+
 ## Monitoramento de Tokens
 
 Todos os scripts incluem **contagem automática de tokens** para ajudar a monitorar custos e uso da API.
@@ -572,24 +915,33 @@ TOTAL - Zero-Shot Prompting
 ├── README.pt-BR.md           # Documentação em português
 ├── requirements.txt          # Dependências do projeto
 ├── config.py                 # Configuração centralizada + Token tracking
-├── sample_data/              # Dados de exemplo para RAG e Vision
-│   ├── documents/            # Documentos de texto para RAG
+├── sample_data/              # Dados de exemplo para RAG, Vision e Context Engineering
+│   ├── documents/            # Documentos de texto para RAG e Context Engineering
 │   │   ├── ai_handbook.txt
 │   │   ├── company_faq.txt
-│   │   └── technical_docs.md
+│   │   ├── technical_docs.md
+│   │   ├── products_catalog.json   # Dados de produtos com metadados (Self-Query)
+│   │   ├── news_articles.txt       # Artigos com datas (Time-Weighted)
+│   │   └── long_document.txt       # Documento grande (Long Context)
 │   └── images/               # Imagens para demos de Vision
 │       ├── chart.png
 │       ├── diagram.png
 │       └── photo.jpg
 └── techniques/
-    ├── en/                   # Exemplos em inglês (20 scripts)
+    ├── en/                   # Exemplos em inglês (30 scripts)
     │   ├── 01_zero_shot.py
     │   ├── ...
-    │   └── 20_meta_prompting.py
-    └── pt-br/                # Exemplos em português (20 scripts)
+    │   ├── 20_meta_prompting.py
+    │   ├── 21_advanced_chunking.py
+    │   ├── ...
+    │   └── 30_time_weighted.py
+    └── pt-br/                # Exemplos em português (30 scripts)
         ├── 01_zero_shot.py
         ├── ...
-        └── 20_meta_prompting.py
+        ├── 20_meta_prompting.py
+        ├── 21_advanced_chunking.py
+        ├── ...
+        └── 30_time_weighted.py
 ```
 
 ## Configuração
@@ -644,6 +996,11 @@ A temperatura é um dos parâmetros mais importantes ao trabalhar com LLMs. Ela 
 | Structured Output | 0.0 | Schema consistente |
 | Tool Calling | 0.0 | Uso confiável de ferramentas |
 | Meta-Prompting | 0.5 - 0.7 | Prompts criativos |
+| Transformação de Query | 0.3 - 0.7 | Variações criativas |
+| Compressão Contextual | 0.0 | Extração precisa |
+| Self-Query (geração filtro) | 0.0 | Filtros precisos |
+| Multi-Vetor (resumos) | 0.3 | Resumos equilibrados |
+| Contexto Longo | 0.0 - 0.3 | Síntese precisa |
 
 ## Modelos Suportados
 
@@ -675,6 +1032,9 @@ A temperatura é um dos parâmetros mais importantes ao trabalhar com LLMs. Ela 
 - `pypdf` - Processamento de PDF
 - `unstructured` - Parsing de documentos
 
+### Dependências Context Engineering
+- `rank-bm25` - Busca por palavras-chave BM25 para Busca Híbrida
+
 ### Dependências Ollama
 - `langchain-ollama` - Integração com Ollama
 
@@ -684,6 +1044,8 @@ A temperatura é um dos parâmetros mais importantes ao trabalhar com LLMs. Ela 
 
 ## Dicas de Uso
 
+### Prompt Engineering
+
 1. **Comece com Zero-Shot** - É a técnica mais simples e funciona bem para tarefas diretas.
 
 2. **Use CoT para raciocínio** - Problemas matemáticos, lógicos ou que requerem análise se beneficiam do "pense passo a passo".
@@ -692,11 +1054,29 @@ A temperatura é um dos parâmetros mais importantes ao trabalhar com LLMs. Ela 
 
 4. **Self-Consistency para precisão** - Quando precisa de alta precisão em tarefas de raciocínio, gere múltiplas respostas e vote.
 
-5. **RAG para conhecimento** - Use RAG quando precisa que o modelo responda baseado em documentos específicos.
+5. **Ollama para privacidade** - Use modelos locais quando privacidade de dados é importante ou quer evitar custos de API.
 
-6. **Ollama para privacidade** - Use modelos locais quando privacidade de dados é importante ou quer evitar custos de API.
+6. **Structured Output para APIs** - Ao construir integrações, use modelos Pydantic para garantir saída consistente.
 
-7. **Structured Output para APIs** - Ao construir integrações, use modelos Pydantic para garantir saída consistente.
+### Context Engineering
+
+7. **RAG para conhecimento** - Use RAG quando precisa que o modelo responda baseado em documentos específicos.
+
+8. **Busca Híbrida para precisão** - Combine BM25 + Vetor quando consultas contêm termos específicos ou palavras-chave.
+
+9. **Chunking Avançado para qualidade** - Escolha estratégia de chunking baseada no tipo de conteúdo (semântico para artigos, markdown-aware para docs).
+
+10. **Transformação de Query para recall** - Use HyDE ou Multi-Query quando a qualidade inicial de recuperação está baixa.
+
+11. **Compressão Contextual para tokens** - Comprima documentos recuperados para reduzir uso de tokens mantendo relevância.
+
+12. **Self-Query para dados estruturados** - Use quando documentos têm metadados ricos que podem filtrar resultados.
+
+13. **Documento-Pai para contexto** - Quando chunks recuperados faltam contexto ao redor, use recuperação documento-pai.
+
+14. **Contexto Longo para docs grandes** - Use Map-Reduce para sumarização, Map-Rerank para Q&A em documentos grandes.
+
+15. **Ponderação Temporal para atualidade** - Use quando recência do documento importa (notícias, logs, histórico de chat).
 
 ## Custos
 
