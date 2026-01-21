@@ -1,6 +1,6 @@
 # Prompt Engineering & Context Engineering with LangChain and OpenAI
 
-Scripts demonstrating 40 Prompt Engineering, Context Engineering, and Agentic AI techniques using LangChain and the OpenAI API.
+Scripts demonstrating 45 Prompt Engineering, Context Engineering, and Agentic AI techniques using LangChain and the OpenAI API.
 
 > **Language / Idioma:** [Português Brasileiro](README.pt-BR.md) | English
 
@@ -97,6 +97,16 @@ Scripts demonstrating 40 Prompt Engineering, Context Engineering, and Agentic AI
 | `38_cost_optimization.py` | Cost Optimization | Token counting, model selection, usage tracking, budget management |
 | `39_ai_testing.py` | AI Testing | Testing non-deterministic outputs, validators, mocking, snapshots |
 | `40_fine_tuning.py` | Fine-tuning | Dataset preparation, validation, fine-tuning workflow, best practices |
+
+### Agentic AI - Advanced (41-45)
+
+| Script | Technique | Description |
+|--------|-----------|-------------|
+| `41_agent_skills.py` | Agent Skills | On-demand knowledge loading, SEO-like skill descriptions, lazy loading |
+| `42_context_window.py` | Context Window Management | Monitor context usage, smart summarization, context health tracking |
+| `43_subagent_orchestration.py` | Subagent Orchestration | Isolated context windows, parallel execution, results aggregation |
+| `44_shared_memory.py` | Shared Memory | Memory DB for agents, short/medium/long-term memory, feedback loops |
+| `45_spec_generation.py` | Spec-Driven Development | Technical specification generation, validation, task breakdown |
 
 ## Requirements
 
@@ -230,6 +240,13 @@ python techniques/en/37_caching_strategies.py
 python techniques/en/38_cost_optimization.py
 python techniques/en/39_ai_testing.py
 python techniques/en/40_fine_tuning.py
+
+# Agentic AI - Advanced (41-45)
+python techniques/en/41_agent_skills.py
+python techniques/en/42_context_window.py
+python techniques/en/43_subagent_orchestration.py
+python techniques/en/44_shared_memory.py
+python techniques/en/45_spec_generation.py
 ```
 
 **Portuguese examples:**
@@ -1209,7 +1226,7 @@ TOTAL - Zero-Shot Prompting
 │       ├── diagram.png
 │       └── photo.jpg
 └── techniques/
-    ├── en/                   # English examples (40 scripts)
+    ├── en/                   # English examples (45 scripts)
     │   ├── 01_zero_shot.py
     │   ├── ...
     │   ├── 20_meta_prompting.py
@@ -1217,16 +1234,14 @@ TOTAL - Zero-Shot Prompting
     │   ├── ...
     │   ├── 30_time_weighted.py
     │   ├── 31_mcp_basics.py
-    │   ├── 32_mcp_server_stdio.py
-    │   ├── 33_mcp_server_http.py
-    │   ├── 34_multi_agent.py
-    │   ├── 35_prompt_evaluation.py
-    │   ├── 36_llm_security.py
-    │   ├── 37_caching_strategies.py
-    │   ├── 38_cost_optimization.py
-    │   ├── 39_ai_testing.py
-    │   └── 40_fine_tuning.py
-    └── pt-br/                # Portuguese examples (40 scripts)
+    │   ├── ...
+    │   ├── 40_fine_tuning.py
+    │   ├── 41_agent_skills.py
+    │   ├── 42_context_window.py
+    │   ├── 43_subagent_orchestration.py
+    │   ├── 44_shared_memory.py
+    │   └── 45_spec_generation.py
+    └── pt-br/                # Portuguese examples (45 scripts)
         ├── 01_zero_shot.py
         ├── ...
         ├── 20_meta_prompting.py
@@ -1234,15 +1249,13 @@ TOTAL - Zero-Shot Prompting
         ├── ...
         ├── 30_time_weighted.py
         ├── 31_mcp_basics.py
-        ├── 32_mcp_server_stdio.py
-        ├── 33_mcp_server_http.py
-        ├── 34_multi_agent.py
-        ├── 35_prompt_evaluation.py
-        ├── 36_llm_security.py
-        ├── 37_caching_strategies.py
-        ├── 38_cost_optimization.py
-        ├── 39_ai_testing.py
-        └── 40_fine_tuning.py
+        ├── ...
+        ├── 40_fine_tuning.py
+        ├── 41_agent_skills.py
+        ├── 42_context_window.py
+        ├── 43_subagent_orchestration.py
+        ├── 44_shared_memory.py
+        └── 45_spec_generation.py
 ```
 
 ## Configuration

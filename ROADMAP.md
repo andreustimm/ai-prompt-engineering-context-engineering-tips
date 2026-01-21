@@ -1,6 +1,6 @@
 # AI-Assisted Development Study Roadmap
 
-A comprehensive guide for developers who want to master AI-assisted development, connecting the 30 techniques in this project with modern tools like Claude Code.
+A comprehensive guide for developers who want to master AI-assisted development, connecting the 45 techniques in this project with modern tools like Claude Code.
 
 > **Language / Idioma:** [Português Brasileiro](ROADMAP.pt-BR.md) | English
 
@@ -53,7 +53,7 @@ AI-assisted development is a paradigm where developers work alongside AI tools t
 
 ## 2. Technique Connection Map
 
-Understanding how the 30 techniques relate to each other helps you choose the right tool for each situation.
+Understanding how the 45 techniques relate to each other helps you choose the right tool for each situation.
 
 ```
 FOUNDATION (01-06)
@@ -119,6 +119,9 @@ FOUNDATION (01-06)
 | **Advanced Features** | 18-20 | Vision, memory, prompt optimization |
 | **Chunking & Retrieval** | 21-25 | RAG optimization |
 | **Context Management** | 26-30 | Advanced RAG patterns |
+| **MCP & Multi-Agent** | 31-35 | Protocol integrations, multi-agent systems |
+| **Production & Security** | 36-40 | Security, caching, costs, testing, fine-tuning |
+| **Agentic AI Advanced** | 41-45 | Skills, context window, orchestration, memory, specs |
 
 ---
 
@@ -674,6 +677,21 @@ docker build -t app .
 | Multiple methods | 28 Ensemble | Combine retrievers |
 | Large documents | 29 Long Context | Map-Reduce/Refine |
 | Time-sensitive | 30 Time-Weighted | Recency bias |
+| External integrations | 31 MCP Basics | Protocol foundation |
+| CLI tool servers | 32 MCP Server STDIO | Standard I/O |
+| Web service servers | 33 MCP Server HTTP | HTTP/SSE transport |
+| Multiple specialists | 34 Multi-Agent | Parallel collaboration |
+| Prompt quality | 35 Prompt Evaluation | Metrics & testing |
+| Security concerns | 36 LLM Security | Input validation |
+| Response speed | 37 Caching | Reduce latency |
+| Budget constraints | 38 Cost Optimization | Token management |
+| LLM testing | 39 AI Testing | Test strategies |
+| Custom behavior | 40 Fine-Tuning | Model training |
+| Dynamic knowledge | 41 Agent Skills | On-demand loading |
+| Long conversations | 42 Context Window | Smart summarization |
+| Complex tasks | 43 Subagent Orchestration | Isolated contexts |
+| Cross-agent learning | 44 Shared Memory | Memory DB |
+| Code generation | 45 Spec Generation | Spec-first approach |
 
 ---
 
@@ -753,6 +771,27 @@ docker build -t app .
 │  ├── Ensemble (28)       → Combine retrievers               │
 │  ├── Long Context (29)   → Large docs                       │
 │  └── Time-Weighted (30)  → Recency bias                     │
+│                                                             │
+│  MCP & MULTI-AGENT                                          │
+│  ├── MCP Basics (31)     → Protocol fundamentals            │
+│  ├── MCP Server STDIO (32) → Standard I/O servers           │
+│  ├── MCP Server HTTP (33) → HTTP/SSE servers                │
+│  ├── Multi-Agent (34)    → Agent collaboration              │
+│  └── Prompt Evaluation (35) → Quality metrics               │
+│                                                             │
+│  PRODUCTION & SECURITY                                      │
+│  ├── LLM Security (36)   → Input validation, guardrails     │
+│  ├── Caching (37)        → Response caching strategies      │
+│  ├── Cost Optimization (38) → Token & cost management       │
+│  ├── AI Testing (39)     → Test strategies for LLMs         │
+│  └── Fine-Tuning (40)    → Model customization              │
+│                                                             │
+│  AGENTIC AI ADVANCED                                        │
+│  ├── Agent Skills (41)   → On-demand knowledge loading      │
+│  ├── Context Window (42) → Smart summarization              │
+│  ├── Subagent Orch. (43) → Isolated context windows         │
+│  ├── Shared Memory (44)  → Memory DB for agents             │
+│  └── Spec Generation (45) → Spec-driven development         │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```

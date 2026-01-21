@@ -1,6 +1,6 @@
 # Roadmap de Estudos para Desenvolvimento Assistido por IA
 
-Um guia completo para desenvolvedores que querem dominar o desenvolvimento assistido por IA, conectando as 30 técnicas deste projeto com ferramentas modernas como Claude Code.
+Um guia completo para desenvolvedores que querem dominar o desenvolvimento assistido por IA, conectando as 45 técnicas deste projeto com ferramentas modernas como Claude Code.
 
 > **Language / Idioma:** Português Brasileiro | [English](ROADMAP.md)
 
@@ -53,7 +53,7 @@ Desenvolvimento assistido por IA é um paradigma onde desenvolvedores trabalham 
 
 ## 2. Mapa de Conexões entre Técnicas
 
-Entender como as 30 técnicas se relacionam ajuda a escolher a ferramenta certa para cada situação.
+Entender como as 45 técnicas se relacionam ajuda a escolher a ferramenta certa para cada situação.
 
 ```
 FUNDAÇÃO (01-06)
@@ -119,6 +119,9 @@ FUNDAÇÃO (01-06)
 | **Features Avançadas** | 18-20 | Visão, memória, otimização de prompts |
 | **Chunking & Retrieval** | 21-25 | Otimização de RAG |
 | **Gerenciamento de Contexto** | 26-30 | Padrões avançados de RAG |
+| **MCP & Multi-Agent** | 31-35 | Integrações de protocolo, sistemas multi-agente |
+| **Produção & Segurança** | 36-40 | Segurança, cache, custos, testes, fine-tuning |
+| **IA Agêntica Avançado** | 41-45 | Skills, janela de contexto, orquestração, memória, specs |
 
 ---
 
@@ -674,6 +677,21 @@ docker build -t app .
 | Múltiplos métodos | 28 Ensemble | Combina retrievers |
 | Documentos grandes | 29 Long Context | Map-Reduce/Refine |
 | Sensível ao tempo | 30 Time-Weighted | Viés de recência |
+| Integrações externas | 31 MCP Basics | Base do protocolo |
+| Servidores CLI | 32 MCP Server STDIO | Standard I/O |
+| Servidores web | 33 MCP Server HTTP | Transporte HTTP/SSE |
+| Múltiplos especialistas | 34 Multi-Agent | Colaboração paralela |
+| Qualidade de prompts | 35 Prompt Evaluation | Métricas & testes |
+| Preocupações de segurança | 36 LLM Security | Validação de input |
+| Velocidade de resposta | 37 Caching | Reduzir latência |
+| Restrições de orçamento | 38 Cost Optimization | Gerenciamento de tokens |
+| Testes de LLM | 39 AI Testing | Estratégias de teste |
+| Comportamento customizado | 40 Fine-Tuning | Treinamento de modelo |
+| Conhecimento dinâmico | 41 Agent Skills | Carregamento sob demanda |
+| Conversas longas | 42 Context Window | Sumarização inteligente |
+| Tarefas complexas | 43 Subagent Orchestration | Contextos isolados |
+| Aprendizado cross-agente | 44 Shared Memory | Memory DB |
+| Geração de código | 45 Spec Generation | Abordagem spec-first |
 
 ---
 
@@ -754,6 +772,27 @@ docker build -t app .
 │  ├── Ensemble (28)       → Combina retrievers               │
 │  ├── Long Context (29)   → Docs grandes                     │
 │  └── Time-Weighted (30)  → Viés de recência                 │
+│                                                             │
+│  MCP & MULTI-AGENT                                          │
+│  ├── MCP Basics (31)     → Fundamentos do protocolo         │
+│  ├── MCP Server STDIO (32) → Servidores Standard I/O        │
+│  ├── MCP Server HTTP (33) → Servidores HTTP/SSE             │
+│  ├── Multi-Agent (34)    → Colaboração entre agentes        │
+│  └── Prompt Evaluation (35) → Métricas de qualidade         │
+│                                                             │
+│  PRODUÇÃO & SEGURANÇA                                       │
+│  ├── LLM Security (36)   → Validação de input, guardrails   │
+│  ├── Caching (37)        → Estratégias de cache             │
+│  ├── Cost Optimization (38) → Gerenciamento de tokens       │
+│  ├── AI Testing (39)     → Estratégias de teste para LLMs   │
+│  └── Fine-Tuning (40)    → Customização de modelos          │
+│                                                             │
+│  IA AGÊNTICA AVANÇADO                                       │
+│  ├── Agent Skills (41)   → Carregamento sob demanda         │
+│  ├── Context Window (42) → Sumarização inteligente          │
+│  ├── Subagent Orch. (43) → Contextos isolados               │
+│  ├── Shared Memory (44)  → Memory DB para agentes           │
+│  └── Spec Generation (45) → Desenvolvimento spec-first      │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
