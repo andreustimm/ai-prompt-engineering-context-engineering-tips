@@ -1,6 +1,6 @@
 # Prompt Engineering & Context Engineering com LangChain e OpenAI
 
-Scripts demonstrando 30 técnicas de Prompt Engineering e Context Engineering usando LangChain e a API da OpenAI.
+Scripts demonstrando 35 técnicas de Prompt Engineering, Context Engineering e IA Agêntica usando LangChain e a API da OpenAI.
 
 > **Language / Idioma:** Português Brasileiro | [English](README.md)
 
@@ -77,6 +77,16 @@ Scripts demonstrando 30 técnicas de Prompt Engineering e Context Engineering us
 | `28_ensemble_retrieval.py` | Recuperação Ensemble | Combina múltiplos retrievers com RRF ponderado |
 | `29_long_context.py` | Estratégias de Contexto Longo | Map-Reduce, Refine, Map-Rerank para documentos grandes |
 | `30_time_weighted.py` | Recuperação Ponderada por Tempo | Viés de recência com decaimento exponencial |
+
+### MCP & IA Agêntica (31-35)
+
+| Script | Técnica | Descrição |
+|--------|---------|-----------|
+| `31_mcp_basics.py` | Fundamentos MCP | Model Context Protocol (recursos, ferramentas, prompts) |
+| `32_mcp_server_stdio.py` | Servidor MCP STDIO | Servidor MCP local com transporte entrada/saída padrão |
+| `33_mcp_server_http.py` | Servidor MCP HTTP/SSE | Servidor MCP remoto com HTTP e Server-Sent Events |
+| `34_multi_agent.py` | Multi-Agente | Agentes de IA colaborativos (pipeline, debate, hierárquico) |
+| `35_prompt_evaluation.py` | Avaliação de Prompts | Avaliar qualidade de prompts, testes A/B, observabilidade |
 
 ## Requisitos
 
@@ -196,6 +206,13 @@ python techniques/pt-br/27_multi_vector.py
 python techniques/pt-br/28_ensemble_retrieval.py
 python techniques/pt-br/29_long_context.py
 python techniques/pt-br/30_time_weighted.py
+
+# MCP & IA Agêntica (31-35)
+python techniques/pt-br/31_mcp_basics.py
+python techniques/pt-br/32_mcp_server_stdio.py
+python techniques/pt-br/33_mcp_server_http.py
+python techniques/pt-br/34_multi_agent.py
+python techniques/pt-br/35_prompt_evaluation.py
 ```
 
 **Exemplos em Inglês:**
@@ -880,6 +897,131 @@ resultados = retriever.recuperar(
 | Documentação | 0.01-0.05 | dias | 0.2-0.4 |
 | Artigos pesquisa | 0.001-0.01 | dias | 0.1-0.3 |
 
+---
+
+### 31. Fundamentos MCP
+
+Model Context Protocol (MCP) é um protocolo aberto criado pela Anthropic para conectar assistentes de IA a fontes de dados e ferramentas externas de forma padronizada.
+
+**Conceitos principais:**
+- Resources - Dados expostos pelo servidor (arquivos, bancos de dados, APIs)
+- Tools - Funções que o LLM pode invocar
+- Prompts - Templates de prompts reutilizáveis
+
+**Exemplo:**
+```python
+from techniques.pt_br.mcp_basics import MCPServerSimulator
+
+servidor = MCPServerSimulator(name="servidor-demo")
+servidor.add_tool("buscar_banco_dados", description="Busca dados", ...)
+servidor.add_resource("file:///config.json", name="Config", ...)
+```
+
+---
+
+### 32. Servidor MCP STDIO
+
+STDIO é o método de transporte mais comum para servidores MCP locais. A comunicação ocorre através de stdin/stdout.
+
+**Casos de uso:**
+- Integração com Claude Desktop
+- Ferramentas de linha de comando
+- Acesso a arquivos locais
+- Execução de scripts
+
+**Exemplo:**
+```python
+# Em produção, use:
+from mcp.server import Server
+from mcp.server.stdio import stdio_server
+
+server = Server("meu-servidor")
+
+async def main():
+    async with stdio_server() as (read_stream, write_stream):
+        await server.run(read_stream, write_stream)
+```
+
+---
+
+### 33. Servidor MCP HTTP/SSE
+
+HTTP/SSE é o método de transporte para servidores MCP remotos. Permite comunicação através da rede.
+
+**Casos de uso:**
+- APIs de IA como serviço
+- Integrações empresariais
+- Servidores centralizados
+- Microserviços de IA
+
+**Exemplo:**
+```python
+# Em produção, use FastAPI com MCP SDK:
+from fastapi import FastAPI
+from mcp.server import Server
+from mcp.server.sse import SseServerTransport
+
+app = FastAPI()
+server = Server("meu-servidor-http")
+```
+
+---
+
+### 34. Aplicações Multi-Agente
+
+Sistemas multi-agente permitem que múltiplos agentes de IA colaborem para resolver tarefas complexas.
+
+**Padrões:**
+- `Pipeline` - Processamento sequencial (Agente1 → Agente2 → Agente3)
+- `Debate` - Agentes com perspectivas diferentes debatem para chegar a consenso
+- `Hierárquico` - Agentes organizados em níveis de autoridade (Diretor → Gerentes → Trabalhadores)
+- `Orquestrador` - Agente central coordena os demais
+
+**Frameworks:**
+- LangGraph (LangChain)
+- AutoGen (Microsoft)
+- CrewAI
+- Swarm (OpenAI)
+
+**Exemplo:**
+```python
+from techniques.pt_br.multi_agent import MultiAgentSystem, Agent, AgentRole
+
+sistema = MultiAgentSystem(name="time-dev")
+sistema.add_agent(Agent(name="Planejador", role=AgentRole.PLANNER, ...))
+sistema.add_agent(Agent(name="Codificador", role=AgentRole.EXECUTOR, ...))
+sistema.add_agent(Agent(name="Revisor", role=AgentRole.REVIEWER, ...))
+```
+
+---
+
+### 35. Avaliação de Prompts
+
+A avaliação de prompts é essencial para garantir qualidade, consistência e melhoria contínua em aplicações com LLMs.
+
+**Métricas:**
+- Relevância - A resposta aborda a pergunta?
+- Coerência - O texto tem lógica e fluxo?
+- Fundamentação - Baseado em fatos/contexto?
+- Precisão - Informações corretas?
+- Segurança - Conteúdo apropriado?
+
+**Ferramentas:**
+- LangSmith (LangChain)
+- LangFuse (Open Source)
+- Weights & Biases
+- Promptfoo (CLI)
+- Phoenix (Arize)
+
+**Exemplo:**
+```python
+from techniques.pt_br.prompt_evaluation import PromptEvaluator
+
+avaliador = PromptEvaluator()
+resultado = avaliador.evaluate_relevance(pergunta, resposta)
+print(f"Relevância: {resultado.score:.2f}")
+```
+
 ## Monitoramento de Tokens
 
 Todos os scripts incluem **contagem automática de tokens** para ajudar a monitorar custos e uso da API.
@@ -928,20 +1070,30 @@ TOTAL - Zero-Shot Prompting
 │       ├── diagram.png
 │       └── photo.jpg
 └── techniques/
-    ├── en/                   # Exemplos em inglês (30 scripts)
+    ├── en/                   # Exemplos em inglês (35 scripts)
     │   ├── 01_zero_shot.py
     │   ├── ...
     │   ├── 20_meta_prompting.py
     │   ├── 21_advanced_chunking.py
     │   ├── ...
-    │   └── 30_time_weighted.py
-    └── pt-br/                # Exemplos em português (30 scripts)
+    │   ├── 30_time_weighted.py
+    │   ├── 31_mcp_basics.py
+    │   ├── 32_mcp_server_stdio.py
+    │   ├── 33_mcp_server_http.py
+    │   ├── 34_multi_agent.py
+    │   └── 35_prompt_evaluation.py
+    └── pt-br/                # Exemplos em português (35 scripts)
         ├── 01_zero_shot.py
         ├── ...
         ├── 20_meta_prompting.py
         ├── 21_advanced_chunking.py
         ├── ...
-        └── 30_time_weighted.py
+        ├── 30_time_weighted.py
+        ├── 31_mcp_basics.py
+        ├── 32_mcp_server_stdio.py
+        ├── 33_mcp_server_http.py
+        ├── 34_multi_agent.py
+        └── 35_prompt_evaluation.py
 ```
 
 ## Configuração
