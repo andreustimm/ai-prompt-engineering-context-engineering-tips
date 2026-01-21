@@ -1,6 +1,6 @@
 # Prompt Engineering & Context Engineering with LangChain and OpenAI
 
-Scripts demonstrating 35 Prompt Engineering, Context Engineering, and Agentic AI techniques using LangChain and the OpenAI API.
+Scripts demonstrating 40 Prompt Engineering, Context Engineering, and Agentic AI techniques using LangChain and the OpenAI API.
 
 > **Language / Idioma:** [Português Brasileiro](README.pt-BR.md) | English
 
@@ -87,6 +87,16 @@ Scripts demonstrating 35 Prompt Engineering, Context Engineering, and Agentic AI
 | `33_mcp_server_http.py` | MCP Server HTTP/SSE | Remote MCP server with HTTP and Server-Sent Events |
 | `34_multi_agent.py` | Multi-Agent | Collaborative AI agents (pipeline, debate, hierarchical patterns) |
 | `35_prompt_evaluation.py` | Prompt Evaluation | Evaluate prompt quality, A/B testing, observability |
+
+### Enterprise & Production (36-40)
+
+| Script | Technique | Description |
+|--------|-----------|-------------|
+| `36_llm_security.py` | LLM Security | OWASP Top 10, prompt injection detection, guardrails, rate limiting |
+| `37_caching_strategies.py` | Caching Strategies | Response cache, semantic cache, embedding cache, conversation cache |
+| `38_cost_optimization.py` | Cost Optimization | Token counting, model selection, usage tracking, budget management |
+| `39_ai_testing.py` | AI Testing | Testing non-deterministic outputs, validators, mocking, snapshots |
+| `40_fine_tuning.py` | Fine-tuning | Dataset preparation, validation, fine-tuning workflow, best practices |
 
 ## Requirements
 
@@ -213,6 +223,13 @@ python techniques/en/32_mcp_server_stdio.py
 python techniques/en/33_mcp_server_http.py
 python techniques/en/34_multi_agent.py
 python techniques/en/35_prompt_evaluation.py
+
+# Enterprise & Production (36-40)
+python techniques/en/36_llm_security.py
+python techniques/en/37_caching_strategies.py
+python techniques/en/38_cost_optimization.py
+python techniques/en/39_ai_testing.py
+python techniques/en/40_fine_tuning.py
 ```
 
 **Portuguese examples:**
@@ -1022,6 +1039,128 @@ result = evaluator.evaluate_relevance(question, answer)
 print(f"Relevance: {result.score:.2f}")
 ```
 
+---
+
+### 36. LLM Security
+
+Security measures for LLM applications following OWASP Top 10 guidelines for LLMs.
+
+**Security components:**
+- `PromptInjectionDetector` - Detects prompt injection attempts
+- `OutputValidator` - Validates and sanitizes LLM outputs
+- `ContentGuardrail` - Enforces content policies
+- `RateLimiter` - Prevents abuse with token bucket algorithm
+- `SecureLLMWrapper` - Combines all security measures
+
+**Example:**
+```python
+from techniques.en.llm_security import SecureLLMWrapper
+
+secure_llm = SecureLLMWrapper(
+    enable_injection_detection=True,
+    enable_output_validation=True,
+    rate_limit_rpm=60
+)
+
+response = secure_llm.chat("User input here")
+```
+
+---
+
+### 37. Caching Strategies
+
+Multiple caching approaches to reduce API costs and improve response times.
+
+**Cache types:**
+- `ResponseCache` - Exact match caching for identical prompts
+- `EmbeddingCache` - Cache embeddings to avoid recomputation
+- `SemanticCache` - Find similar queries using embedding similarity
+- `ConversationCache` - Cache conversation contexts
+
+**Example:**
+```python
+from techniques.en.caching_strategies import SemanticCache
+
+cache = SemanticCache(similarity_threshold=0.95)
+cache.set("What is Python?", "Python is a programming language...")
+
+# Similar query will return cached response
+response = cache.get("Tell me about Python")
+```
+
+---
+
+### 38. Cost Optimization
+
+Tools and strategies to monitor and reduce LLM API costs.
+
+**Components:**
+- `TokenCounter` - Count tokens before API calls
+- `UsageTracker` - Track usage and costs over time
+- `ModelSelector` - Choose optimal model based on task complexity
+
+**Example:**
+```python
+from techniques.en.cost_optimization import TokenCounter, UsageTracker
+
+counter = TokenCounter()
+tokens = counter.count_tokens("Your prompt here")
+estimated_cost = counter.estimate_cost(tokens, 500, "gpt-4o-mini")
+
+tracker = UsageTracker()
+tracker.daily_budget = 1.00
+```
+
+---
+
+### 39. AI Testing
+
+Testing frameworks and strategies for non-deterministic LLM outputs.
+
+**Testing approaches:**
+- Property-based validators (contains, length, regex, JSON)
+- Semantic similarity testing with embeddings
+- LLM-as-Judge evaluation
+- Mock clients for CI/CD
+- Snapshot testing for regression detection
+
+**Example:**
+```python
+from techniques.en.ai_testing import LLMTestRunner, TestCase, ContainsValidator
+
+test = TestCase(
+    name="Greeting test",
+    prompt="Say hello",
+    validators=[ContainsValidator(["hello"])]
+)
+
+runner = LLMTestRunner()
+result = runner.run_test(test)
+```
+
+---
+
+### 40. Fine-tuning
+
+Complete workflow for fine-tuning OpenAI models on custom datasets.
+
+**Components:**
+- `DatasetGenerator` - Create training examples from templates
+- `DatasetValidator` - Validate dataset format and quality
+- `FineTuningManager` - Upload, train, and use fine-tuned models
+
+**Example:**
+```python
+from techniques.en.fine_tuning import DatasetGenerator, DatasetValidator
+
+generator = DatasetGenerator(system_prompt="Classify sentiment...")
+generator.add_examples_from_pairs([
+    ("Great product!", "POSITIVE"),
+    ("Terrible experience", "NEGATIVE")
+])
+generator.export_jsonl("training_data.jsonl")
+```
+
 ## Token Monitoring
 
 All scripts include **automatic token counting** to help monitor costs and API usage.
@@ -1070,7 +1209,7 @@ TOTAL - Zero-Shot Prompting
 │       ├── diagram.png
 │       └── photo.jpg
 └── techniques/
-    ├── en/                   # English examples (35 scripts)
+    ├── en/                   # English examples (40 scripts)
     │   ├── 01_zero_shot.py
     │   ├── ...
     │   ├── 20_meta_prompting.py
@@ -1081,8 +1220,13 @@ TOTAL - Zero-Shot Prompting
     │   ├── 32_mcp_server_stdio.py
     │   ├── 33_mcp_server_http.py
     │   ├── 34_multi_agent.py
-    │   └── 35_prompt_evaluation.py
-    └── pt-br/                # Portuguese examples (35 scripts)
+    │   ├── 35_prompt_evaluation.py
+    │   ├── 36_llm_security.py
+    │   ├── 37_caching_strategies.py
+    │   ├── 38_cost_optimization.py
+    │   ├── 39_ai_testing.py
+    │   └── 40_fine_tuning.py
+    └── pt-br/                # Portuguese examples (40 scripts)
         ├── 01_zero_shot.py
         ├── ...
         ├── 20_meta_prompting.py
@@ -1093,7 +1237,12 @@ TOTAL - Zero-Shot Prompting
         ├── 32_mcp_server_stdio.py
         ├── 33_mcp_server_http.py
         ├── 34_multi_agent.py
-        └── 35_prompt_evaluation.py
+        ├── 35_prompt_evaluation.py
+        ├── 36_llm_security.py
+        ├── 37_caching_strategies.py
+        ├── 38_cost_optimization.py
+        ├── 39_ai_testing.py
+        └── 40_fine_tuning.py
 ```
 
 ## Configuration
